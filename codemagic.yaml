@@ -1,0 +1,15 @@
+workflows:
+  ios-workflow:
+    name: iOS Build
+    instance_type: mac_mini_m2
+    environment:
+      vars:
+        BUNDLE_ID: "io.qzz.mehrad.spy"
+    working_directory: ios
+    scripts:
+      - name: install pods
+        script: pod install
+      - name: build ipa
+        script: xcode-project build-ipa --workspace "Spy.xcworkspace" --scheme "Spy"
+    artifacts:
+      - build/ios/ipa/*.ipa
