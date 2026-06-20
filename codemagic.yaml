@@ -5,10 +5,16 @@ workflows:
     environment:
       vars:
         BUNDLE_ID: "io.qzz.mehrad.spy"
+      integrations:
+        app_store_connect: Codemagic
     working_directory: ios
     scripts:
       - name: install pods
         script: pod install
+      - name: set up code signing
+        script: |
+          xcode-project use-profiles \
+            --type app-store
       - name: build ipa
         script: |
           xcode-project build-ipa \
