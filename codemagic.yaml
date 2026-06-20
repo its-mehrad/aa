@@ -10,6 +10,10 @@ workflows:
       - name: install pods
         script: pod install
       - name: build ipa
-        script: xcode-project build-ipa --workspace "Spy.xcworkspace" --scheme "Spy"
+        script: |
+          xcode-project build-ipa \
+            --workspace "Spy.xcworkspace" \
+            --scheme "Spy" \
+            --export-options-plist "$CM_BUILD_DIR/export_options.plist"
     artifacts:
       - build/ios/ipa/*.ipa
